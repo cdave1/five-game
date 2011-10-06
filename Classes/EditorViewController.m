@@ -98,7 +98,7 @@
 
 - (void)addLevelGroupButtonTouch:(id)sender
 {
-	Levelgroup* group = [Levelgroup LevelgroupMake:@""];
+	Levelgroup * group = [Levelgroup LevelgroupMake:@""];
 	[LevelgroupEditor setCurrentLevelgroup:group];
 	[LevelgroupEditor ReloadViews];	
 	[[self navigationController] pushViewController:[LevelgroupEditor getLevelgroupViewController] animated:YES];

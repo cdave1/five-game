@@ -62,9 +62,9 @@
 	[gameTopMenuView addSubview:lblPoints];
 	[self.view addSubview:gameTopMenuView];
 	
-	backgroundView = [[BackgroundView alloc] initWithFrame:CGRectMake(0.0f, 40.0f, 320.0f, 400.0f)];
-	backgroundView.image = [UIImage imageNamed:[NSString stringWithFormat:@"bg_%d.png", [GameController GetLevelgroupIndex] - 1]];  
-	[self.view addSubview:backgroundView];
+	//backgroundView = [[BackgroundView alloc] initWithFrame:CGRectMake(0.0f, 40.0f, 320.0f, 400.0f)];
+	//backgroundView.image = [UIImage imageNamed:[NSString stringWithFormat:@"bg_%d.png", [GameController GetLevelgroupIndex] - 1]];  
+	//[self.view addSubview:backgroundView];
 	
 	self.gameAreaView = [[GameAreaView alloc] initWithFrame:CGRectMake(0.0f, 40.0f, 320.0f, 400.0f)];
 	[self.view addSubview:self.gameAreaView];

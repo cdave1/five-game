@@ -26,7 +26,6 @@ static LevelsViewController *levelsViewController;
 {
 	if (navigationController == nil) 
     {
-		
 		levelsViewController = [[LevelsViewController alloc] init];
 		
 		navigationController = [[UINavigationController alloc] initWithRootViewController:levelsViewController];

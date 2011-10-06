@@ -62,9 +62,31 @@
 }
 
 
+#pragma mark - UIViewController delegate methods
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	//[self reloadLevelGroups];
+	
+	
+	
+    // watch the keyboard so we can adjust the user interface if necessary.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) 
+												 name:UIKeyboardWillShowNotification object:self.view.window]; 
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    //[self setEditing:NO animated:YES];
+	
+    // unregister for keyboard notifications while not visible.
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil]; 
+}
+
+
 - (void)loadView
 {
-	// setup our parent content view and embed it to your view controller
 	UIView *contentView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
 	contentView.backgroundColor = [UIColor whiteColor];
 	contentView.autoresizesSubviews = YES;
@@ -73,7 +95,8 @@
 	
 	CGRect bounds;
 	
-	if ([LevelgroupEditor getCurrentLevelgroup] == nil || [[LevelgroupEditor getCurrentLevelgroup].name length]== 0) {
+	if ([LevelgroupEditor getCurrentLevelgroup] == nil || [[LevelgroupEditor getCurrentLevelgroup].name length]== 0) 
+    {
 		self.title = @"Add level group";
 		bounds = CGRectMake(0.0f, 0.0f, 320.0f, 438.0f);
 	} 
@@ -234,13 +257,14 @@
 			{
 				// this cell hosts the text field control
 				((CellTextField *)sourceCell).view = txtName;
+                txtNameCell = (CellTextField *)sourceCell;	// kept track for editing
 			}
 			else
 			{	
 				// this cell hosts the info on where to find the code
 				((SourceCell *)sourceCell).sourceLabel.text = @"Name of level group";
 			}
-			txtNameCell = (CellTextField *)sourceCell;	// kept track for editing
+			
 			break;
 		}
 			
@@ -250,13 +274,14 @@
 			{
 				// this cell hosts the rounded text field control
 				((CellTextField *)sourceCell).view = txtDescription;
+                txtDescriptionCell = (CellTextField *)sourceCell;	// kept track for editing
 			}
 			else
 			{
 				// this cell hosts the info on where to find the code
 				((SourceCell *)sourceCell).sourceLabel.text = @"Short description that will appear on save games";
 			}
-			txtDescriptionCell = (CellTextField *)sourceCell;	// kept track for editing
+			
 			break;	
 		}
 			
@@ -267,13 +292,14 @@
 			{
 				// this cell hosts the secure text field control
 				((CellTextField *)sourceCell).view = txtBonusItem;
+                txtBonusItemCell = (CellTextField *)sourceCell;	// kept track for editing
 			}
 			else
 			{
 				// this cell hosts the info on where to find the code
 				((SourceCell *)sourceCell).sourceLabel.text = @"Special bonus when player completes level goals";
 			}
-			txtBonusItemCell = (CellTextField *)sourceCell;	// kept track for editing
+			
 			break;
 		}
 	}
@@ -309,17 +335,17 @@
 	//NSScanner *scanner 
 	//int val = 0;
 	
-	if ([cell isEqual:txtNameCell]) 
+	if (cell == txtNameCell) 
 	{
 		//[[NSScanner scannerWithString:txtName.text] scanInt:&val];
 		[LevelgroupEditor getCurrentLevelgroup].name = txtName.text;
 	} 
-	else if ([cell isEqual:txtDescriptionCell])
+	else if (cell == txtDescriptionCell)
 	{
 		//[[NSScanner scannerWithString:txtDescription.text] scanInt:&val];
 		[LevelgroupEditor getCurrentLevelgroup].description = txtDescription.text;
 	} 
-	else if ([cell isEqual:txtBonusItemCell]) 
+	else if (cell == txtBonusItemCell) 
 	{
 		//[[NSScanner scannerWithString:txtBonusItem.text] scanInt:&val];
 		//[LevelEditor getCurrentLevel].pointslimit = val;
@@ -387,29 +413,6 @@
 	{
         [self setViewMovedUp:NO];
     }*/
-}
-
-
-#pragma mark - UIViewController delegate methods
-
-- (void)viewWillAppear:(BOOL)animated
-{
-	//[self reloadLevelGroups];
-	
-	
-	
-    // watch the keyboard so we can adjust the user interface if necessary.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) 
-												 name:UIKeyboardWillShowNotification object:self.view.window]; 
-}
-
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    //[self setEditing:NO animated:YES];
-	
-    // unregister for keyboard notifications while not visible.
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil]; 
 }
 
 

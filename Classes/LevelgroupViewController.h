@@ -12,7 +12,8 @@
 
 
 @interface LevelgroupViewController : UIViewController <UITextViewDelegate, UITextFieldDelegate,
-UITableViewDelegate, UITableViewDataSource, EditableTableViewCellDelegate> {
+UITableViewDelegate, UITableViewDataSource, EditableTableViewCellDelegate> 
+{
 	UITableView		*myTableView;
 	UITextField		*savedFirstResponder;
 	

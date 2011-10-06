@@ -17,6 +17,7 @@
 @class Levelgroup;
 @class Bonus;
 
+
 typedef enum {
 	NullPiece = -1,
 	RedPiece = 0,
@@ -30,20 +31,24 @@ typedef enum {
 	BombPiece = 8
 } PieceType;
 
+
 typedef enum {
 	StartingPieces = 0,
 	QueueContainer = 1,
 	MagnetContainer = 2
 } ContainerType;
 
+
 typedef enum {
 	NormalTile = 0,
 	WallTile = 1
 } TileType;
 
+
 typedef enum {
 	NonAchivement = 0
 } AchievementType;
+
 
 typedef enum {
 	RedJewelItem = 0,
@@ -63,14 +68,16 @@ typedef enum {
 	NSString *imageName;
 	NSMutableArray *levels;
 }
-@property(readwrite, retain) NSString *name, *description, *imageName;
-@property(readwrite, retain) NSMutableArray* levels;
+
+@property(nonatomic, copy) NSString *name, *description, *imageName;
+@property(nonatomic, retain) NSMutableArray* levels;
 
 + (NSMutableArray *)GetLevelGroups;
 + (void)ReloadLevelGroups;
 + (BOOL)SaveLevelGroups;
 + (Levelgroup *)LevelgroupMake:(NSString *)name;
 + (Levelgroup *)GetLevelGroupWithName:(NSString *)name;
+
 @end
 
 
@@ -89,12 +96,14 @@ typedef enum {
 	NSMutableArray* tiles;
 	Levelgroup* levelgroup;
 }
-@property(readwrite) short order, height, width, minlinesize;
-@property(readwrite) int moveslimit, pointslimit;
-@property(readwrite, retain) NSMutableArray* goals;
-@property(readwrite, retain) NSMutableArray* tiles;
-@property(readwrite, retain) NSMutableArray* startingPieces;
-@property(readwrite, retain) Levelgroup* levelgroup;
+
+@property short order, height, width, minlinesize;
+@property int moveslimit, pointslimit;
+@property(nonatomic, retain) NSMutableArray* goals;
+@property(nonatomic, retain) NSMutableArray* tiles;
+@property(nonatomic, retain) NSMutableArray* startingPieces;
+@property(nonatomic, retain) Levelgroup* levelgroup;
+
 @end
 
 
@@ -105,12 +114,13 @@ typedef enum {
 	TileType type;
 	Piece* piece;
 }
-@property(readwrite) short index;
-@property(readwrite) short position;
-@property(readwrite) TileType type;
-@property(readwrite, retain) Piece* piece;
 
-@property(readonly) BOOL isEmpty;
+@property short index;
+@property short position;
+@property TileType type;
+@property(nonatomic, retain) Piece * piece;
+@property BOOL isEmpty;
+
 @end
 
 
@@ -120,8 +130,10 @@ typedef enum {
 	int position;
 }
 - initWithType:(PieceType)theType;
-@property(readwrite) int position;
-@property(readwrite) PieceType type;
+
+@property int position;
+@property PieceType type;
+
 @end
 
 
@@ -132,15 +144,19 @@ typedef enum {
 @end
 
 
-@interface SaveGame : NSObject <NSCoding> {
+@interface SaveGame : NSObject <NSCoding> 
+{
 	int totalpoints;
 	int levelpoints;
 	int levellineCount;
 	int levelmovesCount;
 	Level* level;
 }
-@property(readwrite) int totalpoints, levelpoints, levellineCount, levelmovesCount;
+
+@property int totalpoints, levelpoints, levellineCount, levelmovesCount;
+
 + (id)GetSavegameForLevelGroup:(Levelgroup *)levelgroup;
+
 @end
 
 
@@ -152,9 +168,12 @@ typedef enum {
 	int levelid;
 	Achievement* achievement;
 }
-@property(readwrite) int type, count, points;
+
+@property int type, count, points;
+
 - (void)setLevel:(Level *)level;
 - (Level *)level;
 - (void)setAchievement:(Achievement *)achievement;
 - (Achievement *)achievement;
+
 @end
