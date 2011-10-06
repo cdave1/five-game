@@ -1,0 +1,301 @@
+{\rtf1\ansi\ansicpg1252\cocoartf949\cocoasubrtf330
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;\red92\green38\blue153;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww18780\viewh12760\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\f0\fs24 \cf0 The Rainbow Jewel Game\
+\
+Some ideas about the tone of the game:\
+- It's about collecting resources to build something\
+- Have a bonus points mode after each level where you have a limited amount of time to drag goodies to a "chest"\
+- Crystals show up in the queue, but only when you get a line of that colour.\
+- Simple cartoon, almost degenerate gfx like "World of Goo"\
+- "Rainbow Industries" idea\
+- Each level group is a "job" you do for someone.\
+- Shady character is interested in the crystals.\
+\
+\
+\
+The game will have three "modes":\
+\
+- Level "adventure" mode which has about 60 levels and various tasks to complete\
+- Puzzle mode - about 30-odd puzzles that have to completed within a certain number of moves.\
+- Basic mode - just try and keep the square clear of tiles.\
+\
+The play area starts with a set of jewels that can be moved by the player. When the player moves a jewel, more jewels are placed on the screen. The goal is to place the jewels in rows and columns of the same colour. When this happens, the row is cleared to create more space for further jewels.\
+\
+Skill comes in via resource management - making "bonus" moves that activate power ups and give the player resources to play the game further.\
+\
+Each game mode has a "rewind" function which must be activated on each level by getting two rows.\
+\
+
+\b Jewel Types
+\b0 \
+\
+All modes have various jewels:\
+\
+\ul Standard colour jewels\ulnone  - red, orange, yellow, green, blue, indigo, violet. Need to get these in a row to clear them and earn points.\
+\
+\ul Rainbow "wildcard"\ulnone  - clear with a rainbow animation playing in the back ground. Acts as "all" colours, so it behave as a green in a row of greens. Can be used to complete "chains".\
+\
+\ul Magnet\ulnone  - when you clear a row with the magnet, you get activate the magnet vault which can save five jewels in a special queue for the player to re-use. "Magnetted" jewels can be pushed back on to the play area at any time by the player.\
+\
+\ul Bomb\ulnone  - explodes - removing all jewels around blast radius (2-3 squares). Could be both a blessing and a curse. Adding a bomb to the magnet queue explodes all the tiles there.\
+\
+\ul Basher\ulnone  - when the line it is in is clear, the basher clears out the jewels orthogonal to the line it was in. If it hits another basher, that basher will do the same thing - get a chain bonus when this happens. If it hits a bomb or a magnet, these will activate as if they were in a row.\
+\
+\ul Warp\ulnone  - when the line containing a warp is cleared, the warp destroys all jewels equal to the colour of the jewels in the cleared line.\
+\
+\
+There are various probablilities of the jewels appearing. Approx. 80-90% of the jewels will be standard colour jewels. In some levels, certain tiles simply will not appear.\
+\
+
+\b Winning Moves
+\b0 \
+\
+The simplest winning move occurs when the player places a number of jewels of the same colour in a line. When this happens, the jewels in the line disappear, and the players earns some points. If the haven't completed the level at that point, more jewels will appear at random places on the board. \
+\
+In certain cases, the player can place a jewel that completes two (or more) lines. When this occurs they get a chain bonus, which gives them many more points than they'd get if they completed the lines separately.\
+\
+There are also additional rewards for clearing a row with more than the minimal number of jewels. \
+\
+These bonuses are as follows:\
+\
+- Single line with minimum required jewels: 1 pt per jewel\
+- Single line with min+1: 1pt per jewel + 1pt\
+- Single line with min+2: 1pt per jewel + 3pt\
+- Single line with min+3: 1pt per jewel + 8pt\
+- Single line with min+4: 1pt per jewel + 16pt\
+- Single line with min+5: 2pt per jewel + 20pt.\
+\
+Wildcard jewels are counted as any other standard jewels.\
+\
+Multi-line bonuses:\
+\
+- Double: 2x points earned for both lines + 2x points multiplier for 20 secs\
+- Triple: 4x points earned for all lines + 4x points multiplier for 20 secs\
+- Quadruple: 6x points earned for all lines + 6x points multiplier for 20 secs\
+- Quintuple: 10x points earned for all lines + 10x points for 20 secs + achievement unlocked.\
+\
+Warps: 1pt per jewel * floor(jewels.count/5). \
+Bombs: Same as lines\
+Basher: as for warps, with additional 2x multiplier for each basher chain (so the second basher will be double the first).\
+\
+\
+\
+\
+Implementing double/triple/quads\
+\
+Stored as game goals\
+\
+When a player makes a move a number of winning moves can be generated.\
+- If the move did not generate any winning goals, then reset all of the game goals.\
+\
+New pieces are, from the players, point of view, added all at the same time. \
+- Update relevant game goals. \
+- DO NOT reset any goals.\
+\
+\
+\
+BONUSES:\
+\
+Goals contain bonuses. When a goal is achieved we collect the bonus information from the goal object.\
+\
+This bonus must be then translated into a typed action that can represent the bonus to the player. An example is when a player gets two items in a row - they receive a points bonus. \
+\
+When the bonus is awarded, an animation plays. The bonus can be reversed, so there needs to be an associated action. This is why I am thinking that the bonus adopt the state change protocol so Commit and Reverse are built in to the object. Each bonus implementation would need it's own version of Commit/Reverse, and a pointer to the container that holds points for the game.\
+\
+This is flawed, however. The bonus object should just be a data container. There needs to be separate bonus action class.\
+\
+The bonuses all must know what winning move lead to the bonus being awarded.\
+\
+Bonus types:\
+- Points Bonus - gives additional points to the user.\
+- Multiplier bonus - applies a multiplier to what was scored this move; the multiplier will be related to the goal. so might be helpful to have a pointer back to the goal\
+- ItemBonus - give points and some item\
+- MagicItemBonus - give points and a magic item that gives capabilities to the user\
+\
+There are no composite bonuses, though a goal may have multiple bonuses. The goal determines whether the bonus has been earned.\
+\
+@protocol Bonus\
+\pard\tx480\pardeftab480\ql\qnatural\pardirnatural
+
+\f1\fs20 \cf0 \CocoaLigature0 - (\cf2 NSString\cf0  *)getMessage;\
+- (BonusType)getType;
+\f0\fs24 \CocoaLigature1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+\cf0 @end\
+\
+@interface PointsBonus : NSObject <NSCoding, Bonus>\
+\{ int points \}\
+\
+@interface BonusAction : PaperworkAction <NSCoding, StateChange>\
+Commit/Reverse\
+@end\
+\
+Points:\
+- All levels have set bonuses and multipliers. A level designer can add more to these, but the initial ones stay.\
+\
+\
+Other bonuses can be attached to the level.\
+\
+\
+Game Animations\
+\
+On points: The points amount will fade in above the mid point of the line that was cleared. It will move upwards approximately 30-40pixels over 0.25 seconds before "flying" to the points view at the top right. While travelling to the points, it will reduce in scale exponentially until it disappears. When it reaches the points, the points view will "pulse" and then update with the new points.\
+\
+Implementation: The game animation delegate is responsible for animating the paperwork actions. The delegate will have a view and animation assigned to it (as a property curreView). When the animation stops, the view will be removed and a new one will be created to animate the next action in the queue.\
+\
+PointPaperworkAction\
+\
+The points paper work action is an action that is rewarded on a particular game action.\
+\
+A problem we have is that there might be one or more goals attached to the move or level. These goals may contain one or more bonuses. The bonuses affect the final points given to the user. For each bonus, we need to apply the bonus to the initial points amount given. For example, a multiplier bonus will multiply the points earned by a certain factor. Because of this design, the bonus paperwork actions must be committed concurrently, but they can not store the points associated with the bonus since each bonus may have an accumulative effect. Consequently, we must recursively apply each bonus to the raw points earned. The final points total will then be stored in a PointsPaperworkAction object.\
+\
+This leads to a change - even though the BonusPaperworkAction implements the Bonus protocol, Commit and Reverse won't do anything for simple Bonuses.\
+\
+\
+The overall plan:\
+\
+
+\b What exactly is the plan here?
+\b0 \
+\
+
+\b FIRST RELEASE
+\b0 \
+\
+
+\b Planet game: 
+\b0 7 planets, 5 levels per planet.\
+\
+Adventure game with 35 levels for $2.99. Fancy backgrounds - main aim is to collect all the jewels otherwise get a bonus for completing the levels at the end. Lots of stats, but none of the skills or anything yet. Local record server on a per-level basis.\
+\
+Bonuses:\
+- Multiple lines get multipliers\
+- double lines of the same colour put jewels into the queue.\
+- Wildcards, gamblers, bombs. magnets.\
+- Collect all jewels to earn the jewel for the planet.\
+- Just points per level with BONUS puzzle levels in between (so 28 levels with bonus puzzles in between).\
+- Static content screens. Different tile set for each planet.\
+\
+Themes:\
+Red - lava planet. Tile style: black obsidian glass\
+Orange - badlands planet. Tile style: light coloured rock\
+Yellow - flower hippy planet. Tile style: clear tiles\
+Green - jungle planet: dirt\
+Blue - sea/ice planet: white ice\
+Indigo - Robot Planet: solid black, alpha 0.75, with curves.\
+Violet - night planet: light yellow moonlight.\
+\
+TODO: level transitions, level group transitions, queue, jewels, wilcards, gamblers, bombs, magnets, jewels, stats, saving/loading, puzzle game type, game-over transitions. \
+\
+\
+LEVEL GROUP TRANSITIONS\
+\
+- On player won level, show the level won controller.\
+- User clicks go. If there are no more levels in the levelgroup, call PlayerWonLevelgroup.\
+- PlayerWonLevelgroup shows playerwon level group background.\
+- User taps screen. Shows levelgroup intro image and sound. Calls [GameController LoadLevelgroup];\
+- User taps screen. Shows level group messages.\
+- User taps screen. Loads first level in level group.\
+\
+\
+\
+\
+
+\b NEXT RELEASE:
+\b0 \
+\
+Rainbow game:\
+\
+- Game 1: Adventure game with 49 levels for $2.99. Similar concept to planet game, but with carribean islands and cocoanuts. Hoovoodoo as a name? \
+- Game 2: Puzzle game with 30 levels for $0.99\
+- Game 3: Superclock puzzle game with 30 levels for $0.99\
+- Game 4: Standard puzzle game, no levels, Fancy backgrounds, jewels, and skills. $0.99. \
+\
+Just the tiles - try to keep 'em clear.\
+\
+Start requiring a minimum line count of 3, and 3 new pieces per move.\
+\
+Bonuses:\
+- multiple lines get multipliers\
+- double lines of the same colour get jewels.\
+- bonus items when 20 of any colour collected.\
+- After 20 moves, allow wildcard pieces.\
+- After 40 moves, allow bomb pieces and gamblers.\
+- After 20 lines, increase min line count to 4\
+- After 40 lines, increase min line count to 5. 4 new pieces per move.\
+- After 80 lines, 5 new pieces per move, increase playing area by 1 each side.\
+- After 100 lines, increase playing area by 1 each side (no bigger than this).\
+\
+- Every 10 lines change the background image.\
+\
+\
+- Game 5: All four + level editor: $4.99\
+\
+\
+\
+\
+\
+\
+
+\b "Adventure" Mode\
+
+\b0 \
+Each level has some kind of goal that must be achieved within an infinite number of moves (or limited number, as the case may be). First few levels have tutorials attached that explain the rules of the game.\
+\
+
+\b "Puzzle" Mode
+\b0 \
+\
+Each level has a limited number of moves - must be completed within the number of moves.\
+\
+
+\b "Timed" puzzle mode
+\b0 \
+\
+Same as puzzle mode, except there are time limits instead of move limits.\
+\
+\
+\
+\
+\
+-- a savegame tied to a level group - created as soon as the player starts a game in that particular levelgroup - will never be deleted.\
+CREATE TABLE savegames ("id" INTEGER PRIMARY KEY NOT NULL, "levelgroupId" integer DEFAULT NULL, "levelId" integer DEFAULT NULL, "totalpoints" integer DEFAULT 0, "levelpoints" integer DEFAULT 0, "levellineCount" integer DEFAULT 0, "levelmovesCount" integer DEFAULT 0);\
+\
+-- lines associated with each level - saved when the level is won\
+CREATE TABLE scorings ("id" INTEGER PRIMARY KEY NOT NULL, "levelId" integer DEFAULT NULL, "type" integer DEFAULT NULL, "count" integer DEFAULT 0, "points" integer DEFAULT 0, "achievementId" integer DEFAULT NULL);\
+\
+-- completed goals\
+CREATE TABLE completedgoals ("id" INTEGER PRIMARY KEY NOT NULL, "goalId" INTEGER DEFAULT NULL, "savegameId" INTEGER DEFAULT NULL);\
+\
+-- the save game has a current level. This table stores the pieces that were present on the board when the game was saved.\
+-- These entries need to be completely removed once the game is resumed.\
+-- The pieces are stored in some kind of container, 0 for the board, 1 for queue, etc...\
+CREATE TABLE containeritems("id" INTEGER PRIMARY KEY NOT NULL, "containertype" integer DEFAULT 0, "piecetype" integer DEFAULT 0, "savegameId" DEFAULT NULL, "position" integer DEFAULT NULL);\
+\
+-- At the end of a level, winning lines are saved so that stats can be recorded.\
+CREATE TABLE levels ("id" INTEGER PRIMARY KEY NOT NULL, "height" integer DEFAULT 0, "width" integer DEFAULT 0, "moveslimit" integer DEFAULT -1, "pointslimit" integer DEFAULT -1, "minlinesize" integer DEFAULT 0, "levelgroupId" integer DEFAULT NULL);\
+\
+-- starting pieces on the board, with their associated _position_ rather than tile.\
+CREATE TABLE levelitems ("id" INTEGER PRIMARY KEY NOT NULL, "containertype" integer DEFAULT 0, "piecetype" integer DEFAULT 0, "position" integer DEFAULT NULL, "levelId" integer default NULL);\
+\
+-- Tiles for a particular level.\
+CREATE TABLE tiles ("id" INTEGER PRIMARY KEY NOT NULL, "position" integer DEFAULT NULL, "type" integer DEFAULT 0, "levelId" integer default NULL);\
+\
+-- When the user passes a goal for a particular level, an achievement is saved here.\
+CREATE TABLE achievements ("id" INTEGER PRIMARY KEY NOT NULL, "savegameId" integer default NULL, "levelId" integer default NULL, "goalId" integer default NULL, "type" integer DEFAULT 0, "text" varchar(255) DEFAULT "");\
+\
+CREATE TABLE bonuses ("id" INTEGER PRIMARY KEY NOT NULL, "type" INTEGER DEFAULT 0, "count" INTEGER DEFAULT -1, "tag" varchar(255) DEFAULT NULL, "goalId" INTEGER DEFAULT NULL);\
+\
+CREATE TABLE levelgroups("id" INTEGER PRIMARY KEY NOT NULL, "name" varchar(255) DEFAULT NULL, "description" TEXT DEFAULT NULL, "created" integer DEFAULT 0, "imageName" varchar(63) DEFAULT NULL);\
+\
+CREATE TABLE goals ("id" INTEGER PRIMARY KEY NOT NULL, "type" INTEGER DEFAULT 0, "isOptional" INTEGER DEFAULT 0, "count" INTEGER DEFAULT -1, "tag" varchar(255) DEFAULT NULL, "levelId" integer DEFAULT NULL);\
+\
+\
+\
+
+\b \
+}
