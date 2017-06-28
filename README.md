@@ -1,6 +1,6 @@
 # Five In A Row Game
 
-![Screenshot](https://github.com/cdave1/five-game/raw/master/Screenshots/fivegame.png)
+![Screenshot](https://github.com/cdave1/five-game/raw/master/Screenshots/fivegame2.png)
 
 One of the first iPhone games I made.  The purpose was primarily to learn Cocoa and Objective-C.  The game is a version of a "five-in-a-row" game.
 
