@@ -30,7 +30,7 @@
 
 - (void)loadLevel:(Level *)level
 {
-	for (int i = 0; i < level.tiles.count; i++) {
+	for (NSInteger i = 0; i < level.tiles.count; i++) {
 		Tile *t = [level.tiles objectAtIndex:i];
 		if (t.type == NormalTile) {
 			MapTileView *mapTileView = [[MapTileView alloc] initWithTile:t];
@@ -60,7 +60,7 @@
 }
 
 
-- (void)CreateTiles:(int)touchBeganTileIndex to:(int)touchEndedTileIndex
+- (void)CreateTiles:(NSInteger)touchBeganTileIndex to:(NSInteger)touchEndedTileIndex
 {
 	// Create a bunch of tiles.
 	if (touchEndedTileIndex != -1 && touchBeganTileIndex != -1) {
@@ -76,11 +76,11 @@
 		short min_row = (began_row < ended_row) ? began_row : ended_row;
 		short max_row = (began_row >= ended_row) ? began_row : ended_row;
 		
-		for (int i = min_col; i <= max_col; i++)
+		for (NSInteger i = min_col; i <= max_col; i++)
 		{
-			for (int j = min_row; j <= max_row; j++)
+			for (NSInteger j = min_row; j <= max_row; j++)
 			{
-				int index = ((j * kMapTilesWidthCount) + i);
+				NSInteger index = ((j * kMapTilesWidthCount) + i);
 				if ([self viewWithTag:index + 100] == nil) {
 					Tile* tile = [[Tile alloc] init];
 					tile.position = index;
@@ -96,7 +96,7 @@
 }
 
 
-- (void)EraseTiles:(int)touchBeganTileIndex to:(int)touchEndedTileIndex
+- (void)EraseTiles:(NSInteger)touchBeganTileIndex to:(NSInteger)touchEndedTileIndex
 {
 	// Create a bunch of tiles.
 	if (touchEndedTileIndex != -1 && touchBeganTileIndex != -1) {
@@ -112,11 +112,11 @@
 		short min_row = (began_row < ended_row) ? began_row : ended_row;
 		short max_row = (began_row >= ended_row) ? began_row : ended_row;
 		
-		for (int i = min_col; i <= max_col; i++)
+		for (NSInteger i = min_col; i <= max_col; i++)
 		{
-			for (int j = min_row; j <= max_row; j++)
+			for (NSInteger j = min_row; j <= max_row; j++)
 			{
-				int index = ((j * kMapTilesWidthCount) + i);
+				NSInteger index = ((j * kMapTilesWidthCount) + i);
 				UIView* view = [self viewWithTag:index + 100];
 				if (view != nil) {
 					[view removeFromSuperview];
@@ -130,7 +130,7 @@
 // Lose the mapTileViews.
 - (void) resetView
 {
-	int count = [self subviews].count - 1;
+	NSInteger count = [self subviews].count - 1;
 	while(count >= 0)
 	{
 		[[[self subviews] objectAtIndex:count--] removeFromSuperview];

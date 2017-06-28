@@ -71,7 +71,7 @@
 
 - (NSArray *)TilesChanged
 {
-	NSNumber *num = [[NSNumber alloc] initWithInt:self.tileIndex];
+	NSNumber *num = [[NSNumber alloc] initWithInteger:self.tileIndex];
 	NSArray *array = [NSArray arrayWithObjects:num, nil];
 	[num release];
 	return array;

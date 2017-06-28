@@ -76,11 +76,11 @@
 	
 	// create our text fields to be recycled when UITableViewCells are created
 	txtMinLineSize = [EditorViewController createNumericField];	
-	txtMinLineSize.text = [[NSNumber numberWithInt:[LevelEditor getCurrentLevel].minlinesize] stringValue];
+	txtMinLineSize.text = [[NSNumber numberWithInteger:[LevelEditor getCurrentLevel].minlinesize] stringValue];
 	txtMovesLimit = [EditorViewController createNumericField];
-	txtMovesLimit.text = [[NSNumber numberWithInt:[LevelEditor getCurrentLevel].moveslimit] stringValue];
+	txtMovesLimit.text = [[NSNumber numberWithInteger:[LevelEditor getCurrentLevel].moveslimit] stringValue];
 	txtPointsLimit = [EditorViewController createNumericField];
-	txtPointsLimit.text = [[NSNumber numberWithInt:[LevelEditor getCurrentLevel].pointslimit] stringValue];
+	txtPointsLimit.text = [[NSNumber numberWithInteger:[LevelEditor getCurrentLevel].pointslimit] stringValue];
 }
 
 

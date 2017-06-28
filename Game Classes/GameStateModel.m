@@ -19,10 +19,10 @@ struct Node {
 
 
 @interface GameStateModel (Private)
-	+ (NSMutableArray *)CountTiles:(int)tileIndex direction:(int)direction;
-	+ (NSMutableArray *)CountTiles:(int)tileIndex type:(PieceType)type direction:(int)direction;
-	+ (int)AddDirection:(int)tileIndex direction:(int)direction;
-	+ (short)MDistance:(short)direction fromIndex:(short)from toIndex:(short)to;
+	+ (NSMutableArray *)CountTiles:(NSInteger)tileIndex direction:(NSInteger)direction;
+	+ (NSMutableArray *)CountTiles:(NSInteger)tileIndex type:(PieceType)type direction:(NSInteger)direction;
+	+ (NSInteger)AddDirection:(NSInteger)tileIndex direction:(NSInteger)direction;
+	+ (NSInteger)MDistance:(NSInteger)direction fromIndex:(NSInteger)from toIndex:(NSInteger)to;
 @end
 
 
@@ -36,9 +36,9 @@ struct Node {
 	NSMutableArray *tileSets = [NSMutableArray array];
 	NSMutableArray *visited = [NSMutableArray array];
 	
-	int maxTiles = [GameController GetMaximumTilesForCurrentLevel];
+	NSInteger maxTiles = [GameController GetMaximumTilesForCurrentLevel];
 	
-	for(int i = 0; i < maxTiles; i++)
+	for(NSInteger i = 0; i < maxTiles; i++)
 	{
 		Tile *t = [[GameController GetTiles] objectAtIndex:i];
 		if (t.isEmpty == false && [visited containsObject:t] == NO) {
@@ -75,7 +75,7 @@ struct Node {
 }
 
 
-+ (NSMutableArray *)CountTiles:(int)tileIndex direction:(int)direction
++ (NSMutableArray *)CountTiles:(NSInteger)tileIndex direction:(NSInteger)direction
 {
 	if (tileIndex >= [GameController GetTiles].count) return nil;
 	if (tileIndex <= -1) return nil;
@@ -96,7 +96,7 @@ struct Node {
 
 // Recursively construct an array of tiles that share the same color as the tile 
 // at tileIndex when travelling in direction across the game board.
-+ (NSMutableArray *)CountTiles:(int)tileIndex type:(PieceType)type direction:(int)direction
++ (NSMutableArray *)CountTiles:(NSInteger)tileIndex type:(PieceType)type direction:(NSInteger)direction
 {
 	if (tileIndex >= [GameController GetTiles].count) return nil;
 	if (tileIndex <= -1) return nil;
@@ -112,7 +112,7 @@ struct Node {
 }
 		
 		
-+ (int)AddDirection:(int)tileIndex direction:(int)direction
++ (NSInteger)AddDirection:(NSInteger)tileIndex direction:(NSInteger)direction
 {
 	short row = floor(tileIndex / [GameController GetCurrentLevel].width);
 	short col = (tileIndex % [GameController GetCurrentLevel].width);
@@ -133,7 +133,7 @@ struct Node {
 
 
 // Check if there's a path from a to b.
-+ (BOOL)TryNextMove:(int)fromIndex to:(int)toIndex
++ (BOOL)TryNextMove:(NSInteger)fromIndex to:(NSInteger)toIndex
 {
 	if (fromIndex >= [GameController GetTiles].count) return NO;
 	if (toIndex >= [GameController GetTiles].count) return NO;
@@ -153,7 +153,7 @@ struct Node {
 }
 
 
-+ (TileMove *)TileMoveMake:(int)fromIndex to:(int)toIndex
++ (TileMove *)TileMoveMake:(NSInteger)fromIndex to:(NSInteger)toIndex
 {
 	if ([GameStateModel TryNextMove:fromIndex to:toIndex]) {
 		TileMove* t = [[TileMove alloc] init];
@@ -170,25 +170,25 @@ struct Node {
 
 // Returns an array of tiles from the movement starting point
 // to toIndex, using A* algorithm.
-+ (NSMutableArray *)FindMovementPath:(int)fromIndex to:(int)toIndex 
++ (NSMutableArray *)FindMovementPath:(NSInteger)fromIndex to:(NSInteger)toIndex
 {	
 	if (toIndex > [GameController GetTiles].count) return nil;
 	Tile* t = [[GameController GetTiles] objectAtIndex:toIndex];
 	if (!t.isEmpty) return nil;
 	
-	int maxTiles = [GameController GetMaximumTilesForCurrentLevel];
+	NSInteger maxTiles = [GameController GetMaximumTilesForCurrentLevel];
 	struct Node *top = 0;
 
 	// the DFS stack
-	short stackTop = 0;
+	NSInteger stackTop = 0;
 	struct Node nodeStack[maxTiles];
 	
 	// visited tiles
-	short visitedCount = 0;
+	NSInteger visitedCount = 0;
 	struct Node visited[maxTiles];
 	
 	// best path to goal
-	short nodeStackIndex = -1;
+	NSInteger nodeStackIndex = -1;
 	bool hasVisited = false;
 	
 	// Add the first item to the stack.
@@ -217,7 +217,7 @@ struct Node {
 			{ (top->tileIndex + WEST),	[GameStateModel MDistance:WEST	fromIndex:top->tileIndex toIndex:toIndex], top->G + 1, top } };
 		
 		// Add all of these to the nodeStack
-		for(short i = 0; i < 4; i++)
+		for(NSInteger i = 0; i < 4; i++)
 		{
 			if (arr[i].H < MAX_DISTANCE) {
 				Tile* t = [[GameController GetTiles] objectAtIndex:arr[i].tileIndex];
@@ -226,7 +226,7 @@ struct Node {
 					nodeStackIndex = -1;
 					
 					// Check if we've visited before
-					for (short k = 0; k < visitedCount; k++)
+					for (NSInteger k = 0; k < visitedCount; k++)
 					{
 						if (arr[i].tileIndex == visited[k].tileIndex) 
 						{
@@ -238,7 +238,7 @@ struct Node {
 					// process the node if not.
 					if (!hasVisited) {
 						// Check if the node is already on the node stack
-						for(short j = 0; j < stackTop; j++)
+						for(NSInteger j = 0; j < stackTop; j++)
 						{
 							if (arr[i].tileIndex == nodeStack[j].tileIndex)
 							{
@@ -272,9 +272,9 @@ struct Node {
 		//
 		// TODO: optimize me!
 		struct Node tmp;
-		for(short i = 0; i < stackTop; i++)
+		for(NSInteger i = 0; i < stackTop; i++)
 		{
-			for (short j = i+1; j < stackTop; j++)
+			for (NSInteger j = i+1; j < stackTop; j++)
 			{
 				if ((nodeStack[i].H + nodeStack[i].G) < (nodeStack[j].H + nodeStack[j].G)) 
 				{
@@ -300,16 +300,16 @@ struct Node {
 
 
 // Strict manhattan distance between two tiles
-+ (short)MDistance:(short)direction fromIndex:(short)from toIndex:(short)to
++ (NSInteger)MDistance:(NSInteger)direction fromIndex:(NSInteger)from toIndex:(NSInteger)to
 {
-	int width = [GameController GetCurrentLevel].width;
-	int height = [GameController GetCurrentLevel].height;
+	NSInteger width = [GameController GetCurrentLevel].width;
+	NSInteger height = [GameController GetCurrentLevel].height;
 	
-	short from_row = floor(from / width);
-	short from_col = (from % width);
+	NSInteger from_row = floor(from / width);
+	NSInteger from_col = (from % width);
 
-	short to_row = floor(to / width);
-	short to_col = (to % width);
+	NSInteger to_row = floor(to / width);
+	NSInteger to_col = (to % width);
 	
 	if (direction == NORTH) from_row--;
 	else if (direction == SOUTH) from_row++;
@@ -319,7 +319,7 @@ struct Node {
 	if (from_col < 0 || from_col >= width) return MAX_DISTANCE;
 	if (from_row < 0 || from_row >= height) return MAX_DISTANCE;
 
-	return abs(to_row - from_row) + abs(to_col - from_col);
+	return ABS(to_row - from_row) + ABS(to_col - from_col);
 }
 
 @end

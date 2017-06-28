@@ -25,12 +25,12 @@
 
 @interface TileMoveView : UIView 
 {
-	int tileIndex;
+	NSInteger tileIndex;
 	Piece* piece;
 	UIView* gameAreaView;
 }
 
-@property(readwrite) int tileIndex;
+@property(readwrite) NSInteger tileIndex;
 @property(retain) Piece* piece;
 @property(retain) UIView* gameAreaView;
 

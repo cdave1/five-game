@@ -27,8 +27,8 @@
 @property(retain) NSObject* lock;
 
 // Move completion functions
-- (TileMove *)TryNextMove:(int)fromIndex to:(int)toIndex;
-- (BOOL)SetNextMove:(int)fromIndex to:(int)toIndex;
+- (TileMove *)TryNextMove:(NSInteger)fromIndex to:(NSInteger)toIndex;
+- (BOOL)SetNextMove:(NSInteger)fromIndex to:(NSInteger)toIndex;
 - (NSArray *)GetTiles;
 - (BOOL)ReverseMove;
 @end
@@ -50,19 +50,19 @@
 - (void)DoPlayerAction:(PlayerAction *)action;
 - (void)LoadGameState;
 - (NewPiece *)GenerateNewPiece;
-- (NewPiece *)GenerateNewPieceAt:(int)index type:(int)theType;
-- (int)GetTileWidth;
-- (int)GetLevelgroupIndex;
+- (NewPiece *)GenerateNewPieceAt:(NSInteger)index type:(NSInteger)theType;
+- (NSInteger)GetTileWidth;
+- (NSInteger)GetLevelgroupIndex;
 
 @optional
 - (void)DoPlayerAction:(PlayerAction *)action;
 - (NewPiece *)DoNewPiece;
 - (void)DoWinningMove:(NSMutableArray *)winningSets parent:(id<StateChange>)action;
 
-- (void)AddPointsToGame:(int)points;
-- (void)RemovePointsFromGame:(int)points;
+- (void)AddPointsToGame:(NSInteger)points;
+- (void)RemovePointsFromGame:(NSInteger)points;
 
-- (int)DoPointsForWinningMove:(WinningMove *)move;
+- (NSInteger)DoPointsForWinningMove:(WinningMove *)move;
 - (void)AddPointsForWinningMove:(NSMutableArray *)winningMoves;
 - (void)PlayerWonLevel;
 - (void)PlayerWonLevelgroup;

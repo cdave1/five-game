@@ -114,7 +114,7 @@ static NSMutableArray* PieceViewList;
 }
 
 
-+ (void)RemovePieceAtTileIndex:(int)tileIndex
++ (void)RemovePieceAtTileIndex:(NSInteger)tileIndex
 {
 	CGPoint pt = [GameAreaView tileIndexToCGPoint:tileIndex];
 	

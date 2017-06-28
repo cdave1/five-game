@@ -24,7 +24,7 @@
 // as the delegate.
 - (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
 {
-	if (self.index < self.action.newPieces.count) {	
+	if (self.index < self.action.newPieces.count - 1) {
 		NewPiece *next = [self.action.newPieces objectAtIndex:self.index + 1];
 		UIView *nextView = [StateChangeTransactionAnimator GetStateChangeView:next];
 		

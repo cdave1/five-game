@@ -106,7 +106,7 @@
 
 - (void)DoPlayerAction:(PlayerAction *)action
 {
-	int newPieceCount = 3;
+	NSInteger newPieceCount = 3;
 	if ([action isKindOfClass:[TileMove class]])
 	{
 		[action Commit];
@@ -141,16 +141,16 @@
 
 
 // Points - MUST be a paperwork action
-- (int)DoPointsForWinningMove:(WinningMove *)move
+- (NSInteger)DoPointsForWinningMove:(WinningMove *)move
 {
 	// Points per line:	
 	return (move.removePieceActions.count + ((move.removePieceActions.count - [GameController GetMinimumWinningTileCount]) * 2)) * 10;
 }
 
 
-- (int)GoalCheck:(WinningMove *)move withPoints:(int)points
+- (NSInteger)GoalCheck:(WinningMove *)move withPoints:(NSInteger)points
 {
-	int ret = points;
+	NSInteger ret = points;
 	
 	for(Goal* goal in currentLevel.goals)
 	{
@@ -205,7 +205,7 @@
 	{
 		// - Calculate the points awarded for the winning tiles.
 		WinningMove* win = [[WinningMove alloc] initWithTiles:a];
-		int points = [self DoPointsForWinningMove:win];
+		NSInteger points = [self DoPointsForWinningMove:win];
 
 		// - Check if the level had a reward for the type of items
 		//   in the set or goal. Award a bonus if so.	
@@ -231,13 +231,13 @@
 }
 
 
-- (void)AddPointsToGame:(int)points
+- (void)AddPointsToGame:(NSInteger)points
 {
 	totalPoints += points;
 }
 
 
-- (void)RemovePointsFromGame:(int)points
+- (void)RemovePointsFromGame:(NSInteger)points
 {
 	totalPoints -= points;
 }
@@ -249,10 +249,10 @@
 	// End the game if the count is zero; otherwise use the
 	// rand() % tileCount to place the new piece.
 	
-	int index = (rand() % 80);
+	NSInteger index = (rand() % 80);
 	
 	Tile* t = [[self GetTiles] objectAtIndex:index];
-	int count = 0;
+	NSInteger count = 0;
 	while(t.isEmpty == NO)
 	{
 		if (count++ >= 80) break;
@@ -279,14 +279,14 @@
 }
 
 
-- (NewPiece *)GenerateNewPieceAt:(int)index type:(int)theType
+- (NewPiece *)GenerateNewPieceAt:(NSInteger)index type:(NSInteger)theType
 {
 	Tile* t = [[self GetTiles] objectAtIndex:index];
 	if (t == nil) return nil;
 	
 	NewPiece* np = [[NewPiece alloc] init];
 	np.tileIndex = index;
-	Piece* p = [[Piece alloc] initWithType:theType];
+	Piece* p = [[Piece alloc] initWithType:(PieceType)theType];
 	np.piece = p;
 	[p release];
 	[np Commit];
@@ -297,13 +297,13 @@
 }
 
 
-- (int) GetTileWidth
+- (NSInteger) GetTileWidth
 {
 	return floor(320.0 / [GameController GetCurrentLevel].width);
 }
 
 
-- (int)GetLevelgroupIndex
+- (NSInteger)GetLevelgroupIndex
 {
 	return 0;
 }

@@ -96,13 +96,13 @@ static TransactedGameController<GameControllerDelegate> *delegate;
 }
 
 
-+ (void)AddPointsToGame:(int)points
++ (void)AddPointsToGame:(NSInteger)points
 {
 	[delegate AddPointsToGame:points];
 }
 
 
-+ (void)RemovePointsFromGame:(int)points
++ (void)RemovePointsFromGame:(NSInteger)points
 {
 	[delegate RemovePointsFromGame:points];
 }
@@ -142,14 +142,14 @@ static TransactedGameController<GameControllerDelegate> *delegate;
 
 
 // Convenience method.
-+ (TileMove *)TryNextMove:(int)fromIndex to:(int)toIndex
++ (TileMove *)TryNextMove:(NSInteger)fromIndex to:(NSInteger)toIndex
 {
 	return [delegate TryNextMove:fromIndex to:toIndex];
 }
 
 
 // Set the next move as a tile move point to point. Assume the move is legal.
-+ (BOOL)SetNextMove:(int)fromIndex to:(int)toIndex
++ (BOOL)SetNextMove:(NSInteger)fromIndex to:(NSInteger)toIndex
 {
 	return [delegate SetNextMove:fromIndex to:toIndex];
 }
@@ -161,13 +161,13 @@ static TransactedGameController<GameControllerDelegate> *delegate;
 }
 
 
-+ (int)GetTileWidth
++ (NSInteger)GetTileWidth
 {
 	return [delegate GetTileWidth];
 }
 
 
-+ (int)GetLevelgroupIndex
++ (NSInteger)GetLevelgroupIndex
 {
 	return [delegate GetLevelgroupIndex];
 }
@@ -179,13 +179,13 @@ static TransactedGameController<GameControllerDelegate> *delegate;
 }
 
 
-+ (int)GetMaximumTilesForCurrentLevel
++ (NSInteger)GetMaximumTilesForCurrentLevel
 {
 	return delegate.currentLevel.width * delegate.currentLevel.height;
 }
 
 
-+ (short)GetMinimumWinningTileCount
++ (NSInteger)GetMinimumWinningTileCount
 {
 	return delegate.currentLevel.minlinesize;
 }

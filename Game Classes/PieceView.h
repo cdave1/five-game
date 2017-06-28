@@ -18,7 +18,7 @@
 
 - initWithPiece:(Piece *)p;
 + (PieceView *)PieceViewMake:(Piece*)p;
-+ (void)RemovePieceAtTileIndex:(int)tileIndex;
++ (void)RemovePieceAtTileIndex:(NSInteger)tileIndex;
 + (PieceView *)GetPieceViewAtPoint:(CGPoint)point;
 + (void)ClearPieces;
 +(UIImage *)GetPieceImage:(PieceType)pieceType;

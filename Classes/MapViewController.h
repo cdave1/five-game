@@ -20,8 +20,8 @@
 	UIBarButtonItem *eraser;
 	
 }
-+ (int)CGPointToTileIndex:(CGPoint)point;
-+ (CGPoint)tileIndexToCGPoint:(int)tileIndexToPoint;
++ (NSInteger)CGPointToTileIndex:(CGPoint)point;
++ (CGPoint)tileIndexToCGPoint:(NSInteger)tileIndexToPoint;
 
 @property(retain) MapView *mapView;
 @property(retain) MapInteractionView *mapInteractionView;

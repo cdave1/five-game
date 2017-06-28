@@ -22,7 +22,7 @@
 		lblPoints.textColor = [UIColor whiteColor];
 		lblPoints.highlightedTextColor = [UIColor blackColor];
 		lblPoints.font = [UIFont boldSystemFontOfSize:20];
-		lblPoints.text = [NSString stringWithFormat:@"%d pts", action.points];
+		lblPoints.text = [NSString stringWithFormat:@"%ld pts", (long)action.points];
 		
 		[self addSubview:lblPoints];
 	}

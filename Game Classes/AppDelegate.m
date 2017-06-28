@@ -60,7 +60,7 @@
     
     self.viewController = [MainViewController sharedInstance];
 	[self.viewController loadView];
-    [window addSubview:self.viewController.view];
+    [self.window setRootViewController:self.viewController];
     [window makeKeyAndVisible];
 }
 

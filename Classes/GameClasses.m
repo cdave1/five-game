@@ -134,12 +134,12 @@ static NSMutableArray *levelgroups;
 - (id)initWithCoder:(NSCoder *)coder
 {
 	if ((self = [self init]) != nil) {
-		self.order = [coder decodeIntForKey:@"order"];
-		self.height = [coder decodeIntForKey:@"height"];
-		self.width = [coder decodeIntForKey:@"width"];
-		self.moveslimit = [coder decodeIntForKey:@"moveslimit"];
-		self.pointslimit = [coder decodeIntForKey:@"pointslimit"];
-		self.minlinesize = [coder decodeIntForKey:@"minlinesize"];
+		self.order = [coder decodeIntegerForKey:@"order"];
+		self.height = [coder decodeIntegerForKey:@"height"];
+		self.width = [coder decodeIntegerForKey:@"width"];
+		self.moveslimit = [coder decodeIntegerForKey:@"moveslimit"];
+		self.pointslimit = [coder decodeIntegerForKey:@"pointslimit"];
+		self.minlinesize = [coder decodeIntegerForKey:@"minlinesize"];
 		
 		self.goals = [[coder decodeObjectForKey:@"goals"] retain];
 		self.startingPieces = [[coder decodeObjectForKey:@"startingPieces"] retain];
@@ -151,12 +151,12 @@ static NSMutableArray *levelgroups;
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-	[coder encodeInt:self.order forKey:@"order"];
-	[coder encodeInt:self.height forKey:@"height"];
-	[coder encodeInt:self.width forKey:@"width"];
-	[coder encodeInt:self.moveslimit forKey:@"moveslimit"];
-	[coder encodeInt:self.pointslimit forKey:@"pointslimit"];
-	[coder encodeInt:self.minlinesize forKey:@"minlinesize"];
+	[coder encodeInteger:self.order forKey:@"order"];
+	[coder encodeInteger:self.height forKey:@"height"];
+	[coder encodeInteger:self.width forKey:@"width"];
+	[coder encodeInteger:self.moveslimit forKey:@"moveslimit"];
+	[coder encodeInteger:self.pointslimit forKey:@"pointslimit"];
+	[coder encodeInteger:self.minlinesize forKey:@"minlinesize"];
 	
 	[coder encodeObject:self.goals forKey:@"goals"];
 	[coder encodeObject:self.startingPieces forKey:@"startingPieces"];
@@ -171,9 +171,9 @@ static NSMutableArray *levelgroups;
 - (id)initWithCoder:(NSCoder *)coder
 {
 	if ((self = [super init]) != nil) {
-		self.index = [coder decodeIntForKey:@"index"];
-		self.position = [coder decodeIntForKey:@"position"];
-		self.type = (TileType)[coder decodeIntForKey:@"type"];
+		self.index = [coder decodeIntegerForKey:@"index"];
+		self.position = [coder decodeIntegerForKey:@"position"];
+		self.type = (TileType)[coder decodeIntegerForKey:@"type"];
 		self.piece = [coder decodeObjectForKey:@"piece"];
 	}
 	return self;
@@ -182,9 +182,9 @@ static NSMutableArray *levelgroups;
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-	[coder encodeInt:self.index forKey:@"index"];
-	[coder encodeInt:self.position forKey:@"position"];
-	[coder encodeInt:(int)self.type forKey:@"type"];
+	[coder encodeInteger:self.index forKey:@"index"];
+	[coder encodeInteger:self.position forKey:@"position"];
+	[coder encodeInteger:self.type forKey:@"type"];
 	[coder encodeObject:self.piece forKey:@"piece"];
 }
 
@@ -222,8 +222,8 @@ static NSMutableArray *levelgroups;
 - (id)initWithCoder:(NSCoder *)coder
 {
 	if ((self = [super init]) != nil) {
-		self.position = [coder decodeIntForKey:@"position"];
-		self.type = (TileType)[coder decodeIntForKey:@"type"];
+		self.position = [coder decodeIntegerForKey:@"position"];
+		self.type = (TileType)[coder decodeIntegerForKey:@"type"];
 	}
 	return self;
 }
@@ -231,7 +231,7 @@ static NSMutableArray *levelgroups;
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-	[coder encodeInt:self.position forKey:@"position"];
-	[coder encodeInt:(int)self.type forKey:@"type"];
+	[coder encodeInteger:self.position forKey:@"position"];
+	[coder encodeInteger:self.type forKey:@"type"];
 }
 @end

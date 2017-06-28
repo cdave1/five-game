@@ -58,9 +58,9 @@
 
 
 @interface PointsPaperworkAction : PaperworkAction <StateChange> {
-	int points;
+	NSInteger points;
 }
-@property(readwrite) int points;
+@property(readwrite) NSInteger points;
 @end
 
 
@@ -70,14 +70,14 @@
 // When a piece moves from one place to another.
 @interface TileMove : PlayerAction <StateChange> {
 @public 
-	int fromIndex;
-	int toIndex;
+	NSInteger fromIndex;
+	NSInteger toIndex;
 	NSMutableArray* tilePath;
 	Piece* piece;
 }
 
-@property(readwrite) int fromIndex;
-@property(readwrite) int toIndex;
+@property(readwrite) NSInteger fromIndex;
+@property(readwrite) NSInteger toIndex;
 @property(retain) NSMutableArray* tilePath;
 @property(retain) Piece* piece;
 @end
@@ -110,11 +110,11 @@
 // Attached to a winning move.
 @interface RemovePiece : GameAction <StateChange> {
 @public 
-	int tileIndex;
+	NSInteger tileIndex;
 @private
 	Piece* piece;
 }
-@property(readwrite) int tileIndex;
+@property(readwrite) NSInteger tileIndex;
 @property(retain) Piece* piece;
 @end
 
@@ -123,12 +123,12 @@
 @interface NewPiece : GameAction <StateChange>
 {
 @public 
-	int tileIndex;
+	NSInteger tileIndex;
 	Piece* piece;
 	NSMutableArray* gameActions;
 	
 }
-@property(readwrite) int tileIndex;
+@property(readwrite) NSInteger tileIndex;
 @property(retain) Piece* piece;
 @property(retain) NSMutableArray* gameActions;
 

@@ -13,8 +13,8 @@
 // Top level view that acts as an interaction layer - showing
 // overlays and selection boxes.
 @interface MapInteractionView : UIView {
-	@private int touchBeganTileIndex;
-	@private int touchEndedTileIndex;
+	@private NSInteger touchBeganTileIndex;
+	@private NSInteger touchEndedTileIndex;
 	@private MapView* mapView;
 	@private MapEditorMode editorMode;
 }
@@ -23,8 +23,8 @@
 
 @property(readwrite) MapEditorMode editorMode;
 @property(readwrite, retain) MapView* mapView;
-@property(readwrite) int touchBeganTileIndex;
-@property(readwrite) int touchEndedTileIndex;
+@property(readwrite) NSInteger touchBeganTileIndex;
+@property(readwrite) NSInteger touchEndedTileIndex;
 
 - (void)DrawModifySquare;
 - (void)DrawTilerMode;

@@ -88,7 +88,7 @@
     }
 
     //Level *level = [self.levels objectAtIndex:indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"Level %d", indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"Level %ld", (long)indexPath.row];
     return cell;
 }
 

@@ -128,7 +128,7 @@ static TutorialsViewController *tutorialsViewController;
 	// find the boundaries of the play area:
 	int limit = kMapTilesWidthCount * kMapTilesHeightCount;
 	short min_col = kMapTilesWidthCount, max_col = 0, min_row = kMapTilesHeightCount, max_row = 0;
-	for (int i = 0; i < limit; i++)
+	for (NSInteger i = 0; i < limit; i++)
 	{
 		MapTileView *view = (MapTileView *)[mapViewController.mapView viewWithTag:i + 100];
 		
@@ -159,12 +159,12 @@ static TutorialsViewController *tutorialsViewController;
 	lev.tiles = [[NSMutableArray array] retain];
 	lev.startingPieces = [[NSMutableArray array] retain];
 	
-	for (int j = min_row; j <= max_row; j++)
+	for (NSInteger j = min_row; j <= max_row; j++)
 	{
-		for (int i = min_col; i <= max_col; i++)
+		for (NSInteger i = min_col; i <= max_col; i++)
 		{
-			int pos = ((j * kMapTilesWidthCount) + i);
-			int index = (((j - min_row) * lev.width) + (i - min_col));
+			NSInteger pos = ((j * kMapTilesWidthCount) + i);
+			NSInteger index = (((j - min_row) * lev.width) + (i - min_col));
 			
 			MapTileView *mtv = (MapTileView *)[mapViewController.mapView viewWithTag:pos + 100];
 			

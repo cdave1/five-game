@@ -120,7 +120,7 @@
 
 - (void)reloadLevelGroups
 {
-	self.title = [NSString stringWithFormat:@"Level Groups (%d)", [Levelgroup GetLevelGroups].count];
+	self.title = [NSString stringWithFormat:@"Level Groups (%ld)", (long)[Levelgroup GetLevelGroups].count];
 }
 
 

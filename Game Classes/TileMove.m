@@ -50,8 +50,8 @@
 
 - (NSArray *)TilesChanged
 {
-	NSNumber *from = [[NSNumber alloc] initWithInt:self.fromIndex];
-	NSNumber *to = [[NSNumber alloc] initWithInt:self.toIndex];
+	NSNumber *from = [[NSNumber alloc] initWithInteger:self.fromIndex];
+	NSNumber *to = [[NSNumber alloc] initWithInteger:self.toIndex];
 	NSArray *array = [NSArray arrayWithObjects:from, to, nil];
 	[from release];
 	[to release];

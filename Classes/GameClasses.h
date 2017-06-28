@@ -83,13 +83,13 @@ typedef enum {
 
 @interface Level : NSObject <NSCoding>
 {
-	short order;
-	short height;
-	short width;
-	short minlinesize;
+	NSInteger order;
+	NSInteger height;
+	NSInteger width;
+	NSInteger minlinesize;
 	
-	int moveslimit;
-	int pointslimit;
+	NSInteger moveslimit;
+	NSInteger pointslimit;
 	
 	NSMutableArray* goals;
 	NSMutableArray* startingPieces;
@@ -97,8 +97,8 @@ typedef enum {
 	Levelgroup* levelgroup;
 }
 
-@property short order, height, width, minlinesize;
-@property int moveslimit, pointslimit;
+@property NSInteger order, height, width, minlinesize;
+@property NSInteger moveslimit, pointslimit;
 @property(nonatomic, retain) NSMutableArray* goals;
 @property(nonatomic, retain) NSMutableArray* tiles;
 @property(nonatomic, retain) NSMutableArray* startingPieces;
@@ -109,14 +109,14 @@ typedef enum {
 
 @interface Tile : NSObject <NSCoding>
 {
-	short index;
-	short position;
+	NSInteger index;
+	NSInteger position;
 	TileType type;
 	Piece* piece;
 }
 
-@property short index;
-@property short position;
+@property NSInteger index;
+@property NSInteger position;
 @property TileType type;
 @property(nonatomic, retain) Piece * piece;
 @property BOOL isEmpty;
@@ -127,11 +127,11 @@ typedef enum {
 @interface Piece : NSObject <NSCoding>
 {
 	PieceType type;
-	int position;
+	NSInteger position;
 }
 - initWithType:(PieceType)theType;
 
-@property int position;
+@property NSInteger position;
 @property PieceType type;
 
 @end
@@ -146,14 +146,14 @@ typedef enum {
 
 @interface SaveGame : NSObject <NSCoding> 
 {
-	int totalpoints;
-	int levelpoints;
-	int levellineCount;
-	int levelmovesCount;
+	NSInteger totalpoints;
+	NSInteger levelpoints;
+	NSInteger levellineCount;
+	NSInteger levelmovesCount;
 	Level* level;
 }
 
-@property int totalpoints, levelpoints, levellineCount, levelmovesCount;
+@property NSInteger totalpoints, levelpoints, levellineCount, levelmovesCount;
 
 + (id)GetSavegameForLevelGroup:(Levelgroup *)levelgroup;
 
@@ -162,14 +162,14 @@ typedef enum {
 
 @interface Scoring : NSObject <NSCoding>
 {
-	int type;
-	int count;
-	int points;
-	int levelid;
+	NSInteger type;
+	NSInteger count;
+	NSInteger points;
+	NSInteger levelid;
 	Achievement* achievement;
 }
 
-@property int type, count, points;
+@property NSInteger type, count, points;
 
 - (void)setLevel:(Level *)level;
 - (Level *)level;

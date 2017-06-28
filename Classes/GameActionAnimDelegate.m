@@ -49,7 +49,7 @@
 	currView = nil;
 	
 	
-	if (self.index < self.gameAction.paperworkActions.count) {	
+	if (self.index < self.gameAction.paperworkActions.count - 1) {
 		PaperworkAction *next = [self.gameAction.paperworkActions objectAtIndex:self.index + 1];
 		currView = [GameActionAnimDelegate GetNextView:next];
 		
@@ -95,7 +95,7 @@
 		CAKeyframeAnimation *position = [CAKeyframeAnimation animationWithKeyPath:@"position"];
 		CGMutablePathRef thePath = CGPathCreateMutable();
 		
-		int tileXY = [GameController GetTileWidth];
+		NSInteger tileXY = [GameController GetTileWidth];
 
 		// TODO: boundaries check. Could just check it in the middle of the screen?
 		

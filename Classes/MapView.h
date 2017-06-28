@@ -23,8 +23,8 @@
 - (void) resetView;
 - (void)loadLevel:(Level *)level;
 
-- (void)CreateTiles:(int)touchBeganTileIndex to:(int)touchEndedTileIndex;
-- (void)EraseTiles:(int)touchBeganTileIndex to:(int)touchEndedTileIndex;
+- (void)CreateTiles:(NSInteger)touchBeganTileIndex to:(NSInteger)touchEndedTileIndex;
+- (void)EraseTiles:(NSInteger)touchBeganTileIndex to:(NSInteger)touchEndedTileIndex;
 
 
 @end

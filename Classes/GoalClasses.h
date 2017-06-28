@@ -37,12 +37,12 @@
 @interface LinesGoal : Goal <NSCoding, GoalFunctions>
 {
 	PieceType requiredPieceType;
-	int requiredLength;
-	int requiredCount;
-	int progressCount;
+	NSInteger requiredLength;
+	NSInteger requiredCount;
+	NSInteger progressCount;
 }
 @property(readwrite) PieceType requiredPieceType;
-@property(readwrite) int requiredLength, requiredCount, progressCount;
+@property(readwrite) NSInteger requiredLength, requiredCount, progressCount;
 @end
 
 
@@ -59,33 +59,33 @@
 @interface ResourceGoal : Goal <NSCoding, GoalFunctions>
 {
 	PieceType requiredPieceType;
-	int requiredQuantity;
-	int progressQuantity;
+	NSInteger requiredQuantity;
+	NSInteger progressQuantity;
 }
 @property(readwrite) PieceType requiredPieceType;
-@property(readwrite) int requiredQuantity, progressQuantity;
+@property(readwrite) NSInteger requiredQuantity, progressQuantity;
 @end
 
 
 @protocol Bonus
 - (NSString *)getMessage;
-- (int)applyBonus:(int)toPoints;
+- (NSInteger)applyBonus:(NSInteger)toPoints;
 @end
 
 
 @interface PointsBonus : NSObject <NSCoding, Bonus>
 {
-	int points;
+	NSInteger points;
 }
-@property (readwrite) int points;
+@property (readwrite) NSInteger points;
 @end
 
 
 @interface MultiplierBonus : NSObject <NSCoding, Bonus>
 {
-	int multiplier;
+	NSInteger multiplier;
 }
-@property (readwrite) int multiplier;
+@property (readwrite) NSInteger multiplier;
 @end
 
 
@@ -94,16 +94,16 @@
 	Goal* parentGoal;
 }
 @property (readwrite, retain) Goal* parentGoal;
-@property (readonly) int multiplier;
+@property (readonly) NSInteger multiplier;
 @end
 
 
 @interface ItemBonus : NSObject <NSCoding, Bonus>
 {
-	int points;
+	NSInteger points;
 	BonusItemType bonusItemType;
 }
-@property (readwrite) int points;
+@property (readwrite) NSInteger points;
 @property (readwrite) BonusItemType bonusItemType;
 @end
 
@@ -113,8 +113,8 @@
 @interface BonusPaperworkAction : PaperworkAction <StateChange> 
 {
 	id bonus;
-	int points;
+	NSInteger points;
 }
 @property(retain) id bonus;
-@property(readwrite) int points;
+@property(readwrite) NSInteger points;
 @end

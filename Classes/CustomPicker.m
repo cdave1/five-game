@@ -125,7 +125,7 @@
 // tell the picker how many rows are available for a given component (in our case we have one component)
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-	NSUInteger numRows;
+	NSUInteger numRows = 0;
 	if (component == 0)
 	{
 		numRows = (NSUInteger)[pickerViews count];
@@ -154,7 +154,7 @@
 // tell the picker the title for a given component (in our case we have one component)
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-	NSString *title;
+	NSString *title = nil;
 	if (component == 0)
 	{
 		title = @"color";

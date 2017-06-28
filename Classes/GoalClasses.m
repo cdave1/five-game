@@ -47,9 +47,9 @@
 - (void)encodeWithCoder:(NSCoder *)coder
 {
 	//[super encodeWithCoder:coder];
-	[coder encodeInt:(int)self.requiredPieceType forKey:@"requiredPieceType"];
-	[coder encodeInt:self.requiredLength forKey:@"requiredLength"];
-	[coder encodeInt:self.requiredCount forKey:@"requiredCount"];
+	[coder encodeInteger:self.requiredPieceType forKey:@"requiredPieceType"];
+	[coder encodeInteger:self.requiredLength forKey:@"requiredLength"];
+	[coder encodeInteger:self.requiredCount forKey:@"requiredCount"];
 }
 
 
@@ -206,8 +206,8 @@
 - (void)encodeWithCoder:(NSCoder *)coder
 {
 	//[super encodeWithCoder:coder];
-	[coder encodeInt:(int)self.requiredPieceType forKey:@"requiredPieceType"];
-	[coder encodeInt:self.requiredQuantity forKey:@"requiredQuantity"];
+	[coder encodeInteger:self.requiredPieceType forKey:@"requiredPieceType"];
+	[coder encodeInteger:self.requiredQuantity forKey:@"requiredQuantity"];
 }
 
 
@@ -261,17 +261,17 @@
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-	[coder encodeInt:self.points forKey:@"points"];
+	[coder encodeInteger:self.points forKey:@"points"];
 }
 
 
 - (NSString *)getMessage
 {
-	return [NSString stringWithFormat:@"+%d", self.points];
+	return [NSString stringWithFormat:@"+%ld", (long)self.points];
 }
 
 
-- (int)applyBonus:(int)toPoints
+- (NSInteger)applyBonus:(NSInteger)toPoints
 {
 	return self.points + toPoints;
 }
@@ -292,17 +292,17 @@
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-	[coder encodeInt:self.multiplier forKey:@"multiplier"];
+	[coder encodeInteger:self.multiplier forKey:@"multiplier"];
 }
 
 
 - (NSString *)getMessage
 {
-	return [NSString stringWithFormat:@"x%d", self.multiplier];
+	return [NSString stringWithFormat:@"x%ld", (long)self.multiplier];
 }
 
 
-- (int)applyBonus:(int)toPoints
+- (NSInteger)applyBonus:(NSInteger)toPoints
 {
 	return self.multiplier * toPoints;
 }
@@ -325,18 +325,18 @@
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-	[coder encodeInt:self.points forKey:@"points"];
-	[coder encodeInt:(int)self.bonusItemType forKey:@"bonusItemType"];
+	[coder encodeInteger:self.points forKey:@"points"];
+	[coder encodeInteger:self.bonusItemType forKey:@"bonusItemType"];
 }
 
 
 - (NSString *)getMessage
 {
-	return [NSString stringWithFormat:@"+%d", self.points];
+	return [NSString stringWithFormat:@"+%ld", (long)self.points];
 }
 
 
-- (int)applyBonus:(int)toPoints
+- (NSInteger)applyBonus:(NSInteger)toPoints
 {
 	return self.points + toPoints;
 }
@@ -348,7 +348,7 @@
 @implementation GoalMultiplierBonus
 @synthesize parentGoal;
 @dynamic multiplier;
--(int)multiplier
+-(NSInteger)multiplier
 {
 	if ([parentGoal isKindOfClass:[LinesGoal class]])
 		return ((LinesGoal *)parentGoal).progressCount;
@@ -356,9 +356,9 @@
 }
 - (NSString *)getMessage
 {
-	return [NSString stringWithFormat:@"x%d", self.multiplier];
+	return [NSString stringWithFormat:@"x%ld", (long)self.multiplier];
 }
-- (int)applyBonus:(int)toPoints
+- (NSInteger)applyBonus:(NSInteger)toPoints
 {
 	return self.multiplier * toPoints;
 }

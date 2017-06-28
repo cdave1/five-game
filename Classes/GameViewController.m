@@ -82,9 +82,9 @@
 }
 
 
-- (void)SetPoints:(int)points
+- (void)SetPoints:(NSInteger)points
 {
-	lblPoints.text = [[NSNumber numberWithInt:points] stringValue];
+	lblPoints.text = [[NSNumber numberWithInteger:points] stringValue];
 }
 
 

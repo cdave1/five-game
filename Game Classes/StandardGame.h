@@ -12,8 +12,8 @@
 
 @interface StandardGame : TransactedGameController <GameControllerDelegate> 
 {
-	int totalPoints;
-	int totalMoves;
+	NSInteger totalPoints;
+	NSInteger totalMoves;
 	NSMutableArray* gameGoals;
 }
 

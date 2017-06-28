@@ -17,19 +17,19 @@
 
 @interface GameAreaView : UIView {
 	@private TileMove *tileMove;
-	@private int touchBeganTileIndex;
+	@private NSInteger touchBeganTileIndex;
 }
 
 
-@property(readwrite) int touchBeganTileIndex;
+@property(readwrite) NSInteger touchBeganTileIndex;
 @property(retain) TileMove* tileMove;
 
 - (void)LoadCurrentLevel;
--(UIView *)GetTileViewAtIndex:(int)index;
--(PieceView *)AddNewPiece:(Piece *)piece atIndex:(int)index;
+-(UIView *)GetTileViewAtIndex:(NSInteger)index;
+-(PieceView *)AddNewPiece:(Piece *)piece atIndex:(NSInteger)index;
 
-+ (int)CGPointToTileIndex:(CGPoint)point;
-+ (CGPoint)tileIndexToCGPoint:(int)tileIndexToPoint;
++ (NSInteger)CGPointToTileIndex:(CGPoint)point;
++ (CGPoint)tileIndexToCGPoint:(NSInteger)tileIndexToPoint;
 
 @end
 

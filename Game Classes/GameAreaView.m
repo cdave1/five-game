@@ -85,7 +85,7 @@
 }
 
 
--(PieceView *)AddNewPiece:(Piece *)piece atIndex:(int)index
+-(PieceView *)AddNewPiece:(Piece *)piece atIndex:(NSInteger)index
 {
 	CGPoint p = [GameAreaView tileIndexToCGPoint:index];
 	PieceView *pieceView = [PieceView PieceViewMake:piece];
@@ -97,7 +97,7 @@
 }
 
 
-- (void)RemovePiece:(int)pos
+- (void)RemovePiece:(NSInteger)pos
 {
 	CGPoint p = [GameAreaView tileIndexToCGPoint:pos];
 	PieceView *pieceView = [PieceView GetPieceViewAtPoint:p];
@@ -106,7 +106,7 @@
 }
 
 
--(UIView *)GetTileViewAtIndex:(int)index
+-(UIView *)GetTileViewAtIndex:(NSInteger)index
 {
 	return [self viewWithTag:index + 100];
 }
@@ -115,7 +115,7 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	UITouch *touch = [touches anyObject];	
-	int to = [GameAreaView CGPointToTileIndex:[touch locationInView:self]];
+	NSInteger to = [GameAreaView CGPointToTileIndex:[touch locationInView:self]];
 	self.touchBeganTileIndex = to;
 	
 	//[GameController BeginMove];
@@ -126,7 +126,7 @@
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	UITouch *touch = [touches anyObject];	
-	int to = [GameAreaView CGPointToTileIndex:[touch locationInView:self]];
+	NSInteger to = [GameAreaView CGPointToTileIndex:[touch locationInView:self]];
 
 	self.tileMove = [GameController TryNextMove:self.touchBeganTileIndex to:to];
 	
@@ -137,7 +137,7 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	UITouch *touch = [touches anyObject];	
-	int to = [GameAreaView CGPointToTileIndex:[touch locationInView:self]];
+	NSInteger to = [GameAreaView CGPointToTileIndex:[touch locationInView:self]];
 	if ([GameController SetNextMove:[(TileView *)touch.view tileIndex] to:to]) {
 		[GameController CompleteMove];
 	}
@@ -149,7 +149,7 @@
 
 
 // Translate a touchpoint to a position in the array.
-+ (int)CGPointToTileIndex:(CGPoint)point
++ (NSInteger)CGPointToTileIndex:(CGPoint)point
 {
 	float tileXY = [GameController GetTileWidth];
 	
@@ -159,7 +159,7 @@
 
 
 // Translate a position in the array to point (top left of the tile)
-+ (CGPoint)tileIndexToCGPoint:(int)tileIndex
++ (CGPoint)tileIndexToCGPoint:(NSInteger)tileIndex
 {
 	float tileXY = [GameController GetTileWidth];
 	

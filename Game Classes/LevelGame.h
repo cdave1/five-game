@@ -13,10 +13,10 @@
 
 @interface LevelGame : TransactedGameController <GameControllerDelegate> {
 	Levelgroup *levelgroup;
-	int totalPoints;
-	int totalMoves;
-	int levelIndex;
-	int levelgroupIndex;
+	NSInteger totalPoints;
+	NSInteger totalMoves;
+	NSInteger levelIndex;
+	NSInteger levelgroupIndex;
 	NSMutableArray* gameGoals;
 }
 

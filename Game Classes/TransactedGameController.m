@@ -47,7 +47,7 @@
 
 
 // Convenience method.
-- (TileMove *)TryNextMove:(int)fromIndex to:(int)toIndex
+- (TileMove *)TryNextMove:(NSInteger)fromIndex to:(NSInteger)toIndex
 {
 	return [GameStateModel TileMoveMake:fromIndex to:toIndex];
 }
@@ -57,7 +57,7 @@
 
 
 // Set the next move as a tile move point to point. Assume the move is legal.
-- (BOOL)SetNextMove:(int)fromIndex to:(int)toIndex
+- (BOOL)SetNextMove:(NSInteger)fromIndex to:(NSInteger)toIndex
 {
 	@synchronized(lock)
 	{

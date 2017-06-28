@@ -39,21 +39,21 @@ typedef enum {
 + (void)PlayerWonLevel;
 + (void)PlayerWonLevelgroup;
 
-+ (void)AddPointsToGame:(int)points;
-+ (void)RemovePointsFromGame:(int)points;
++ (void)AddPointsToGame:(NSInteger)points;
++ (void)RemovePointsFromGame:(NSInteger)points;
 
-+ (int)GetTileWidth;
-+ (int)GetLevelgroupIndex;
++ (NSInteger)GetTileWidth;
++ (NSInteger)GetLevelgroupIndex;
 
 + (void)CompleteMove;
 + (BOOL)ReverseMove;
 + (NSArray *)GetTiles;
 + (Level *)GetCurrentLevel;
-+ (int)GetMaximumTilesForCurrentLevel;
-+ (short)GetMinimumWinningTileCount;
++ (NSInteger)GetMaximumTilesForCurrentLevel;
++ (NSInteger)GetMinimumWinningTileCount;
 
-+ (TileMove *)TryNextMove:(int)fromIndex to:(int)toIndex;
-+ (BOOL)SetNextMove:(int)fromIndex to:(int)toIndex;
++ (TileMove *)TryNextMove:(NSInteger)fromIndex to:(NSInteger)toIndex;
++ (BOOL)SetNextMove:(NSInteger)fromIndex to:(NSInteger)toIndex;
 
 + (void)JewelLineGoalCreate:(PieceType)pieceType forJewel:(BonusItemType)jewel forGoal:(ConsecutiveGoal *)goal;
 

@@ -24,7 +24,7 @@
 
 - (void)SetupViewsForGame;
 - (void)DestroyViews;
-- (void)SetPoints:(int)points;
+- (void)SetPoints:(NSInteger)points;
 
 @property(retain) InGameMenuView *inGameMenuView;
 @property(retain) GameAreaView *gameAreaView;

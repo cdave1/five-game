@@ -38,7 +38,7 @@
 
 
 // Just init with the frame at the position retrieved from the GameAreaView
--(id)initWithTileIndex:(int)index
+-(id)initWithTileIndex:(NSInteger)index
 {
 	CGPoint topLeft = [GameAreaView tileIndexToCGPoint:index];
 	
@@ -70,7 +70,7 @@
 	[[self nextResponder] touchesEnded:touches withEvent:event];
 }
 
--(int)tileIndex
+-(NSInteger)tileIndex
 {
 	if (tile == nil) return -1;
 	return tile.index;

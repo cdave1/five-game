@@ -10,14 +10,14 @@
 #import "GameClasses.h"
 
 @interface TileView : UIView {
-	int tileIndex;
+	NSInteger tileIndex;
 	Tile* tile;
 }
 
-@property(readwrite) int tileIndex;
+@property(readwrite) NSInteger tileIndex;
 
 -(id)initWithTile:(Tile *)theTile;
--(id)initWithTileIndex:(int)index;
+-(id)initWithTileIndex:(NSInteger)index;
 
 
 

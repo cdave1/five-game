@@ -16,15 +16,15 @@
 
 
 // Translate a touchpoint to a position in the array.
-+ (int)CGPointToTileIndex:(CGPoint)point
++ (NSInteger)CGPointToTileIndex:(CGPoint)point
 {
-	int pos = (floor(point.y / kMapTileWidth) * kMapTilesWidthCount) + floor(point.x / kMapTileWidth);
+	NSInteger pos = (floor(point.y / kMapTileWidth) * kMapTilesWidthCount) + floor(point.x / kMapTileWidth);
 	return pos;
 }
 
 
 // Translate a position in the array to point (top left of the tile)
-+ (CGPoint)tileIndexToCGPoint:(int)tileIndex
++ (CGPoint)tileIndexToCGPoint:(NSInteger)tileIndex
 {
 	CGFloat x = (tileIndex % kMapTilesWidthCount) * kMapTileWidth;
 	CGFloat y = (tileIndex / kMapTilesWidthCount) * kMapTileWidth;

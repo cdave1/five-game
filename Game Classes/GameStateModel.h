@@ -27,8 +27,8 @@
 
 
 @interface GameStateModel : NSObject {}
-+ (BOOL)TryNextMove:(int)fromIndex to:(int)toIndex;
-+ (TileMove *)TileMoveMake:(int)fromIndex to:(int)toIndex;
-+ (NSMutableArray *)FindMovementPath:(int)fromIndex to:(int)toIndex;
++ (BOOL)TryNextMove:(NSInteger)fromIndex to:(NSInteger)toIndex;
++ (TileMove *)TileMoveMake:(NSInteger)fromIndex to:(NSInteger)toIndex;
++ (NSMutableArray *)FindMovementPath:(NSInteger)fromIndex to:(NSInteger)toIndex;
 + (NSMutableArray *)GetWinningTileSets;
 @end

@@ -137,7 +137,7 @@
 	CGPathMoveToPoint(thePath, NULL, from.x + 20.0, from.y + 20.0);
 	
 	// Path comes out in reverse order. TODO: use reverse Enumerator
-	for(int i = tileMovementPath.tilePath.count - 1; i >= 0; i--)
+	for(NSInteger i = tileMovementPath.tilePath.count - 1; i >= 0; i--)
 	{
 		Tile* t = [tileMovementPath.tilePath objectAtIndex:i];
 		CGPoint p = [GameAreaView tileIndexToCGPoint:t.index];

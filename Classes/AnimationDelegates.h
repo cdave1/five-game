@@ -23,11 +23,11 @@
 // Animates each of the game actions in the player action
 @interface PlayerActionAnimDelegate : NSObject
 {
-	int index;
+	NSInteger index;
 	PlayerAction* action;
 }
 
-@property(readwrite) int index;
+@property(readwrite) NSInteger index;
 @property(retain) PlayerAction* action;
 @end
 
@@ -35,22 +35,22 @@
 // Animates each of the game actions in the player action
 @interface GameStartAnimDelegate : NSObject
 {
-	int index;
+	NSInteger index;
 	GameStart* action;
 }
 
-@property(readwrite) int index;
+@property(readwrite) NSInteger index;
 @property(retain) GameStart* action;
 @end
 
 
 @interface NewPieceAnimDelegate : NSObject
 {
-	int index;
+	NSInteger index;
 	NewPiece* newPiece;
 	id endDelegate;
 }
-@property(readwrite) int index;
+@property(readwrite) NSInteger index;
 @property(retain) NewPiece* newPiece;
 @property(retain) id endDelegate;
 @end
@@ -58,11 +58,11 @@
 
 @interface WinningMoveAnimDelegate : NSObject
 {
-	int index;
+	NSInteger index;
 	WinningMove* winningMove;
 	id endDelegate;
 }
-@property(readwrite) int index;
+@property(readwrite) NSInteger index;
 @property(retain) WinningMove* winningMove;
 @property(retain) id endDelegate;
 @end
@@ -70,7 +70,7 @@
 
 @interface GameActionAnimDelegate : NSObject
 {
-	int index;
+	NSInteger index;
 	GameAction* gameAction; // action from which the things are taken.
 	id endDelegate;
 	UIView *currView;
@@ -79,7 +79,7 @@
 + (void)AnimateGameAction:(GameAction *)action endDelegate:(id)endDelegate;
 + (UIView *)GetNextView:(PaperworkAction *)action;
 
-@property(readwrite) int index;
+@property(readwrite) NSInteger index;
 @property(retain) GameAction* gameAction;
 @property(retain) id endDelegate;
 @property(retain) UIView *currView;
